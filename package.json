@@ -1,5 +1,5 @@
 {
-  "name": "use-retext",
+  "name": "retext",
   "version": "0.0.0-development",
   "description": "🔐 A small, modern react state managment system using hooks.",
   "sideEffects": false,
@@ -11,14 +11,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/blue-tomato/use-retext.git"
+    "url": "https://github.com/wa4-fearless-otter/retext.git"
   },
   "keywords": [
     "react",
     "use-reducer",
     "alternative",
-    "ues-retext",
-    "blue-tomato",
+    "use-retext",
+    "retext",
     "react-hooks",
     "use-state",
     "dispatch",
@@ -26,13 +26,13 @@
     "modern",
     "simple api"
   ],
-  "author": "developer@blue-tomato.com",
+  "author": "rl16@posteo.net",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/blue-tomato/use-retext/issues",
-    "email": "developer@blue-tomato.com"
+    "url": "https://github.com/wa4-fearless-otter/retext/issues",
+    "email": "rl16@posteo.net"
   },
-  "homepage": "https://github.com/blue-tomato/use-retext#readme",
+  "homepage": "https://github.com/wa4-fearless-otter/retext#readme",
   "scripts": {
     "analyze": "yarn build && source-map-explorer './dist/**/*.js'",
     "bundlesize": "bundlesize",
