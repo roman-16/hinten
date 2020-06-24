@@ -1,99 +1,74 @@
-🔐 A small, scoped react state managment system using hooks with an simple api.
+🔐 A small, scoped react state managment system using hooks and a simple api.
 
 # Index
-*
+* [Features](#Features)
+* [Installation](#Installation)
+* [Usage](#Usage)
+  * [Store creation](#Store\ creation)
+  * [Store usage](#Store\ usage)
+  * [Scoped store usage](#Scoped\ store\ usage)
 
 # Features
-* ~1kB gzip, gets checked thanks to [bundlesize](https://github.com/siddharthkp/bundlesize)
-* Scoping of state, actions and reducers
+* < 2kB gzip, gets checked thanks to [bundlesize](https://github.com/siddharthkp/bundlesize)
+* Scoping of state and actions
 * Simple small API
 * Usable for big states
-* Can be used as hook or a with a provider
-* Typescript support
+* Only select what you need
+* Full typescript support
 
 # Installation
-Type `npm install use-retext` into your console
+```
+npm install retext
+```
+or
+```
+yarn add retext
+```
 
 # Usage
-```jsx
-import React from 'react';
-import useRetext from 'use-retext';
-import SideMenu from './SideMenu';
-
-const store = {
-  state: {
-    isOpen: false,
-    searchTerm: undefined,
-  },
-  reducer: {
-    setSearchTerm: (state, payload) => ({ ...state, searchTerm: payload }),
-    sideMenu: {
-      toggle: state => ({ ...state, isOpen: !state.isOpen }),
-    },
-  },
-};
-
-export default ({ children, ...props }) => {
-  const { state, dispatch } = useRetext(store);
-
-  return (
-    <div {...props}>
-      <button
-        type="button"
-        onClick={() => {
-          dispatch.setSearchTerm('test');
-          dispatch.sideMenu.toggle();
-        }}
-      >
-        Test me!
-      </button>
-      <SideMenu state={state} />
-    </div>
-  );
-};
-```
-
-# Usage with `createStore`
-`Store.js`
+## Store creation
 ```js
-import { createStore } from 'use-retext';
+// useStore.js
+import createStore, { action } from 'retext';
 
-const store = {
-  state: {
+const useStore = createStore({
+  // State
+  count: 1,
+
+  // Actions which change the state
+  increment: action((state) => ({ count: state.count + 1 })),
+  // Actions can have a payload, which will be placed in the second argument
+  setCount: action((state, count) => ({ count })),
+
+  // Scope
+  sideMenu: {
     isOpen: false,
-    searchTerm: undefined,
-  },
-  reducer: {
-    setSearchTerm: (state, payload) => ({ ...state, searchTerm: payload }),
-    sideMenu: {
-      toggle: state => ({ ...state, isOpen: !state.open }),
+    maxItems: 100,
+
+    // This action has the same key as the action above
+    // If the action above gets called, this gets too
+    // If the action in this scope gets called, the above won't get called
+    increment: action((state) => ({ maxItems: state.maxItems + 1 })),
+    // This action is only available in this scope
+    toggle: action((state) => ({ isOpen: !state.isOpen })),
+
+    child: {
+      isExpanded: false,
+
+      toggle: action((state) => ({ isExpanded: !state.isExpanded })),
     },
   },
-};
+});
 
-const [Store, useStore] = createStore(store);
+export default useStore;
 
-export default Store;
-export { useStore };
 ```
 
-`Parent.jsx`
+## Store usage
 ```jsx
+// A.jsx
 import React from 'react';
-import Store from './Store';
-import Child from './Child';
-
-export default ({ ...props }) => (
-  <Store {...props}>
-    <Child />
-  </Store>
-);
-```
-
-`Child.jsx`
-```jsx
-import React from 'react';
-import { useStore } from './Store';
+import useStore from './useStore';
 
 export default ({ ...props }) => {
   const { state, dispatch } = useStore();
@@ -103,15 +78,51 @@ export default ({ ...props }) => {
       <button
         type="button"
         onClick={() => {
-          dispatch.setSearchTerm('test');
+          // The payload is the first argument
+          dispatch.setCount(9);
+
+          // increment in sideMenu will get called
+          // it won't get called in the scope above
+          dispatch.sideMenu.icrement();
+
+          // toggle in sideMenu and in child will get called
+          dispatch.sideMenu.toggle();
         }}
       >
         Test me!
       </button>
-      <div>Search term: {state.searchTerm}</div>
+
+      {state.count}
+      {state.sideMenu.isOpen}
     </div>
   );
-};
+}
+
 ```
 
-# Motivation
+## Scoped store usage
+```jsx
+// B.jsx
+import React from 'react';
+import useStore from './useStore';
+
+export default ({ ...props }) => {
+  // If you don't need the entire store you can simple select a part of it
+  // This component will only get rerender if something changes in it's selected part
+  const { state, dispatch } = useStore('sideMenu.child');
+
+  return (
+    <div {...props}>
+      <button
+        type="button"
+        onClick={() => dispatch.toggle()}
+      >
+        Test me!
+      </button>
+
+      {state.isExpanded}
+    </div>
+  );
+}
+
+```
