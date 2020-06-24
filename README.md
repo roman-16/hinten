@@ -4,9 +4,9 @@
 * [Features](#Features)
 * [Installation](#Installation)
 * [Usage](#Usage)
-  * [Store creation](#Store\ creation)
-  * [Store usage](#Store\ usage)
-  * [Scoped store usage](#Scoped\ store\ usage)
+  * [Store creation](#Store%20creation)
+  * [Store usage](#Store%20usage)
+  * [Scoped store usage](#Scoped%20store%20usage)
 
 # Features
 * < 2kB gzip, gets checked thanks to [bundlesize](https://github.com/siddharthkp/bundlesize)
