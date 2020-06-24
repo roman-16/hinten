@@ -1,5 +1,5 @@
 {
-  "name": "retext",
+  "name": "hinten",
   "version": "0.0.0-development",
   "description": "🔐 A small, modern react state managment system using hooks.",
   "sideEffects": false,
@@ -11,14 +11,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wa4-fearless-otter/retext.git"
+    "url": "https://github.com/wa4-fearless-otter/hinten.git"
   },
   "keywords": [
     "react",
     "use-reducer",
     "alternative",
-    "use-retext",
-    "retext",
+    "hinten",
     "react-hooks",
     "use-state",
     "dispatch",
@@ -29,10 +28,10 @@
   "author": "rl16@posteo.net",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/wa4-fearless-otter/retext/issues",
+    "url": "https://github.com/wa4-fearless-otter/hinten/issues",
     "email": "rl16@posteo.net"
   },
-  "homepage": "https://github.com/wa4-fearless-otter/retext#readme",
+  "homepage": "https://github.com/wa4-fearless-otter/hinten#readme",
   "scripts": {
     "analyze": "yarn build && source-map-explorer './dist/**/*.js'",
     "bundlesize": "bundlesize",

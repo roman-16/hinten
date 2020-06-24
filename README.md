@@ -1,4 +1,4 @@
-🔐 A small, scoped react state managment system using hooks and a simple api.
+🔐 Hinten is a small, scoped react state managment system using hooks and a simple api.
 
 # Index
 * [Features](#Features)
@@ -18,18 +18,18 @@
 
 # Installation
 ```
-npm install retext
+npm install hinten
 ```
 or
 ```
-yarn add retext
+yarn add hinten
 ```
 
 # Usage
 ## Store creation
 ```js
 // useStore.js
-import createStore, { action } from 'retext';
+import createStore, { action } from 'hinten';
 
 const useStore = createStore({
   // State
