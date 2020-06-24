@@ -1,2 +1,2 @@
-export type Reducer = (state: any, payload?: any) => object;
+export type Reducer = (state: any, payload?: any) => unknown;
 export type Store = Record<string, unknown>;

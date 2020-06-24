@@ -1,53 +1,31 @@
-// import { configure } from 'enzyme';
-// import Adapter from 'enzyme-adapter-react-16';
-// import { Store } from './src/Store';
+import { action } from './src';
 
-// configure({ adapter: new Adapter() });
+declare global {
+  // eslint-disable-next-line @typescript-eslint/no-namespace
+  namespace NodeJS {
+    interface Global {
+      store: Record<string, unknown>;
+    }
+  }
+}
 
-// const initialState = {
-//   count: 0,
-//   sideMenu: {
-//     isOpen: false,
-//     maxItems: 100,
-//     child: {
-//       isExpanded: false,
-//     },
-//   },
-// };
+global.store = {
+  count: 1,
 
-// const store: Store<typeof initialState> = {
-//   state: initialState,
-//   action: {
-//     increment: 0,
-//     sideMenu: {
-//       toggle: 0,
-//       increment: 0,
-//       child: {
-//         toggle: 0,
-//       },
-//     },
-//   },
-//   // This is what sets the new state
-//   reducer: {
-//     toggle: () => ({}), // Never gets called
-//     increment: (state) => ({ count: state.count + 1 }),
-//     sideMenu: {
-//       toggle: (state) => ({ isOpen: !state.isOpen }), // Can only change state of sideMenu
-//       increment: (state) => ({ maxItems: state.maxItems + 1 }),
-//       child: {
-//         toggle: (state) => ({ isExpanded: !state.isExpanded }),
-//       },
-//     },
-//   },
-// };
+  increment: action((state: { count: number }) => ({ count: state.count + 1 })),
+  setCount: action((state: { count: number }, count: number) => ({ count })),
 
-// declare global {
-//   // eslint-disable-next-line @typescript-eslint/no-namespace
-//   namespace NodeJS {
-//     interface Global {
-//       store: typeof store;
-//     }
-//   }
-// }
+  sideMenu: {
+    isOpen: false,
+    maxItems: 100,
 
-// global.store = store;
+    toggle: action((state: { isOpen: boolean }) => ({ isOpen: !state.isOpen })),
+    increment: action((state: { maxItems: number }) => ({ maxItems: state.maxItems + 1 })),
+
+    child: {
+      isExpanded: false,
+
+      toggle: action((state: { isExpanded: boolean }) => ({ isExpanded: !state.isExpanded })),
+    },
+  },
+};
