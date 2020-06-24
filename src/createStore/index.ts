@@ -6,7 +6,7 @@ import createDispatch from './createDispatch';
 
 interface UpdateInfo {
   scope: string;
-  newState: object;
+  newState: unknown;
 }
 
 const action = (reducer?: Reducer) => ({
@@ -25,7 +25,7 @@ export default (store: Store) => {
     useEffect(() => {
       const stateUpdater = ({ newState, scope }: UpdateInfo) => {
         if (path && scope.startsWith(path)) {
-          setState(get(newState, path));
+          setState(get(newState as Record<string, unknown>, path));
         } else {
           setState(newState);
         }

@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`selects the nested state 1`] = `
+Object {
+  "current": Object {
+    "dispatch": Object {
+      "increment": [Function],
+      "setCount": [Function],
+      "sideMenu": Object {
+        "child": Object {
+          "toggle": [Function],
+        },
+        "increment": [Function],
+        "toggle": [Function],
+      },
+    },
+    "state": Object {
+      "count": 102,
+      "sideMenu": Object {
+        "child": Object {
+          "isExpanded": true,
+        },
+        "isOpen": true,
+        "maxItems": 104,
+      },
+    },
+  },
+  "error": undefined,
+}
+`;
+
+exports[`selects the nested state 2`] = `
+Object {
+  "current": Object {
+    "dispatch": Object {
+      "child": Object {
+        "toggle": [Function],
+      },
+      "increment": [Function],
+      "toggle": [Function],
+    },
+    "state": Object {
+      "child": Object {
+        "isExpanded": true,
+      },
+      "isOpen": true,
+      "maxItems": 104,
+    },
+  },
+  "error": undefined,
+}
+`;
+
+exports[`updates the state on dispatch 1`] = `
+Object {
+  "current": Object {
+    "dispatch": Object {
+      "increment": [Function],
+      "setCount": [Function],
+      "sideMenu": Object {
+        "child": Object {
+          "toggle": [Function],
+        },
+        "increment": [Function],
+        "toggle": [Function],
+      },
+    },
+    "state": Object {
+      "count": 101,
+      "sideMenu": Object {
+        "child": Object {
+          "isExpanded": false,
+        },
+        "isOpen": false,
+        "maxItems": 102,
+      },
+    },
+  },
+  "error": undefined,
+}
+`;

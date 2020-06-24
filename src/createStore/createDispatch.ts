@@ -9,7 +9,7 @@ interface ReducerInfo {
   reducer: Reducer;
 }
 
-export default (initialState: {}, actions: {}): [any, mitt.Emitter] => {
+export default (initialState: Record<string, unknown>, actions: Record<string, unknown>): [any, mitt.Emitter] => {
   const groupedReducer: Record<string, Array<ReducerInfo>> = {};
   const emitter = mitt();
   let currentState = initialState;
@@ -22,7 +22,7 @@ export default (initialState: {}, actions: {}): [any, mitt.Emitter] => {
 
       groupedReducer[key].push({
         scope: actionScope,
-        reducer: (value as Function)(),
+        reducer: (value as () => Reducer)(),
       });
 
       return (payload?: unknown) => {
@@ -31,7 +31,7 @@ export default (initialState: {}, actions: {}): [any, mitt.Emitter] => {
           if (!scope.startsWith(actionScope)) return;
 
           const state = scope ? get(currentState, scope) : currentState;
-          const newState = reducer(state, payload);
+          const newState = reducer(state, payload) as Record<string, unknown>;
 
           if (scope) {
             set(currentState, scope, {
@@ -50,8 +50,6 @@ export default (initialState: {}, actions: {}): [any, mitt.Emitter] => {
           newState: currentState,
           scope: actionScope,
         });
-
-        // return currentState;
       };
     }),
     emitter,
