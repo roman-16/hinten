@@ -1,12 +1,12 @@
 🔐 Hinten is a small, scoped react state managment system using hooks and a simple api.
 
 # Index
-* [Features](#Features)
-* [Installation](#Installation)
-* [Usage](#Usage)
-  * [Store creation](#Store-creation)
-  * [Store usage](#Store-usage)
-  * [Scoped store usage](#Scoped-store-usage)
+* [Features](#features)
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Store creation](#store-creation)
+  * [Store usage](#store-usage)
+  * [Scoped store usage](#scoped-store-usage)
 
 # Features
 * < 2kB gzip, gets checked thanks to [bundlesize](https://github.com/siddharthkp/bundlesize)
