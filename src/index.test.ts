@@ -1,10 +1,10 @@
 import { act, renderHook } from '@testing-library/react-hooks';
 import createStore from '.';
 
-const useRetext = createStore(global.store);
+const useStore = createStore(global.store);
 
 it('updates the state on dispatch', () => {
-  const { result } = renderHook(useRetext);
+  const { result } = renderHook(useStore);
 
   act(() => {
     result.current.dispatch.setCount(100);
@@ -16,8 +16,8 @@ it('updates the state on dispatch', () => {
 });
 
 it('selects the nested state', () => {
-  const { result: outerHook } = renderHook(useRetext);
-  const { result: innerHook } = renderHook(() => useRetext('sideMenu'));
+  const { result: outerHook } = renderHook(useStore);
+  const { result: innerHook } = renderHook(() => useStore('sideMenu'));
 
   act(() => {
     outerHook.current.dispatch.increment();
