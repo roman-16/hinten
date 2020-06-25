@@ -49,7 +49,6 @@ const useStore = createStore({
     // If the action above gets called, this gets too
     // If the action in this scope gets called, the above won't get called
     increment: action((state) => ({ maxItems: state.maxItems + 1 })),
-    // This action is only available in this scope
     toggle: action((state) => ({ isOpen: !state.isOpen })),
 
     child: {
